@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="margin-left:35px">
+<h4 class="display-4"> Tabela Użytkowników </h4>
+<table class="table">
+
+    <tr>
+        <th>Login</th>
+        <th>Uprawnienia</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <th:block th:each="uz : ${lista}">
+        <tr>
+            <td th:text="${uz.login}">...</td>
+            <td th:text="${uz.uprawnienia}">...</td>
+            <td>
+            <form action="#" th:action="@{/Admin/edycja}" th:object="${uza}" method="post">
+                <input type="hidden" th:value="${uz.login}" th:attr="name='login'"></input>
+                <input type="hidden" th:value="${uz.uprawnienia}" th:attr="name='uprawnienia'">
+
+                <!--<input type="hidden" th:value="${uz.klienci}" th:attr="name='klienci'">-->
+                <input class="btn btn-info" type="submit" value="Edytuj"></input>
+            </form>
+            </td>
+            <td>
+                <form action="#" th:action="@{/Admin/usunUser}" th:object="${uza}" method="post">
+                    <input type="hidden" th:value="${uz.login}" th:attr="name='login'"></input>
+                    <input class="btn btn-info" type="submit" value="Usun"></input>
+                </form>
+            </td>
+
+        </tr>
+    </th:block>
+</table>
+</div>
+<div class="bg-light">
+    <div style="margin-left:35px">
+<form action="#" th:action="@{/Admin}" th:object="${user}" method="post" style="margin-top:60px">
+    <h4 class="display-4"> Stwórz nowego użytkownika </h4>
+    <table class="table">
+        <tr>
+
+            <td><input class="form-control" th:field="*{login}" type="text" name="login" placeholder="LOGIN"></input></td>
+        </tr>
+        <tr>
+            <td><input class="form-control" th:field="*{haslo}" type="text" name="haslo" placeholder="HASŁO"></input></td>
+        </tr>
+        <tr>
+                <input type="radio" name="rola" th:field="*{uprawnienia}" value="ADMIN"> ADMIN<br>
+                <input type="radio" name="rola" th:field="*{uprawnienia}" value="USER"> USER <br>
+        </tr>
+        <tr>
+
+            <td><input type="submit" class="btn btn-info" value="Stwórz"></input></td>
+        </tr>
+    </table>
+</form>
+        <p th:text="${co}" style="font-style:oblique; color:blue;"></p>
+    </div>
+</div>
+<form  action="#" th:action="@{/logout}" method="post" style="margin-top:60px; margin-left:35px">
+    <input type="submit" class="btn btn-info" value="Wyloguj"></input>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h4 class="display-4"> Dane użytkownika</h4>
+   <!-- <h4 class="display-3" th:text="${co}"></h4>-->
+    Oplata pobierana co miesiac: <p style="display:inline" th:text="${cena}"></p>
+    <br>
+    Login: <p style="display:inline" th:text="${user.login}"></p>
+    <br>
+    Uprawnienia: <p style="display:inline" th:text="${user.uprawnienia}"></p>
+    <div class="bg-light" style="margin-top:35px">
+        <h4 class="display-4"> Lista Klientów </h4>
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Użytkownicy</th>
+            <th>Lodówki</th>
+        </tr>
+    <th:block th:each="stat : ${lista}">
+        <tr>
+            <td><p style="display:inline" th:text="${stat.id}"></p></td>
+            <td><p style="display:inline" th:text="${stat.users}"></p> </td>
+            <td><p style="display:inline"  th:text="${stat.lodowki}"></p> </td>
+        </tr>
+    </th:block>
+    </table>
+    </div>
+    <form action="#" th:action="@{/user/zmienHaslo}" method="post" style="margin-top:50px">
+        <h4 class="display-4"> Zmien haslo </h4> <p style="font-style:oblique; color:blue;" th:text="${co}"></p>
+        <input class="form-control" type="password" name="stareHaslo" placeholder="StareHasło"></input>
+        <input class="form-control" name="noweHaslo" placeholder="NoweHasło"></input>
+        <input class="btn btn-info" type="submit" value="Zmien" style="margin-top:15px"></input>
+
+    </form>
+    <form  action="#" th:action="@{/logout}" method="post" style="margin-top:50px">
+        <input class="btn btn-info" type="submit" value="Wyloguj"></input>
+    </form>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

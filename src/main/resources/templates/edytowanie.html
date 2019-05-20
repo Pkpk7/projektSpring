@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div style="margin-left:30px">
+
+        <h4 class="display-4"> Edytuj Klientów/Użytkownika </h4>
+<form action="#" th:action="@{/Admin/wyedytowane}" th:object="${uz}" method="post">
+    <table class="table">
+        <input type="hidden" th:value="${uz.id}" th:attr="name='id'"></input>
+        <tr>
+
+            <td>Login: <input class="form-control" th:field="*{login}" type="text" name="login"></input></td>
+            <td><input type="hidden" th:value="*{haslo}" name="haslo"></input></td>
+        </tr>
+        <tr>
+            <input type="radio" name="rola" th:field="*{uprawnienia}" value="ADMIN"> ADMIN<br>
+            <input type="radio" name="rola" th:field="*{uprawnienia}" value="USER"> USER <br>
+        </tr>
+
+        <th:block th:each="stat, it : *{klienci}">
+        <tr>
+            <td>id: <p style="display:inline" th:field="*{klienci[__${it.index}__].id}" th:text="*{klienci[__${it.index}__].id}" name="id"></p></td>
+            <td>uzytkownicy:<input class="form-control" th:field="*{klienci[__${it.index}__].users}" type="text" name="users"> </input></td>
+            <td>lodowki:<input class="form-control" th:field="*{klienci[__${it.index}__].lodowki}" type="text" name="lodowki"> </input></td>
+
+        </tr>
+
+
+
+        </th:block>
+
+        <tr>
+            <!--<td><input class="btn btn-info" type="reset" value="Cofnij Zmiany"/></td>-->
+            <td><input class="btn btn-info" type="submit" value="Submit" th:value="Zapisz"></input></td>
+
+        </tr>
+        <p th:text="${co}" style="font-style:oblique; color:blue;"></p>
+    </table>
+</form>
+</div>
+    <div class="bg-light" >
+        <div style="margin-top:50px; margin-left:30px;">
+    <h4 class="display-4"> Dodaj Klienta </h4>
+
+<form action="#" th:action="@{/Admin/stworz}" th:object="${kl}" method="post" style="margin-top:50px;">
+    <input th:field="${uz.login}" type="hidden" name="login"> </input>
+    Uzytkownicy: <input class="form-control"th:field="*{users}" type="text" name="users" placeholder="Users"> </input>
+    Lodówki: <input  class="form-control" th:field="*{lodowki}" type="text" name="lodowki" placeholder="Lodówki"> </input>
+    <input class="btn btn-info" type="submit" value="Submit" th:value="Utworz" style="margin-top:15px"></input>
+</form>
+        </div>
+</div>
+    <div style="margin-top:50px; margin-left:30px;">
+        <h4 class="display-4"> Usun Klienta o Id </h4>
+<form action="#" th:action="@{/Admin/usun}" th:object="${kl}" method="post" style="margin-top:50px;">
+    <input th:field="${uz.login}" type="hidden" name="login"> </input>
+    <input class="form-control" th:field="*{id}" type="text" name="id" placeholder="ID"> </input>
+    <input th:field="*{users}" type="hidden" name="users" value="0"> </input>
+    <input th:field="*{lodowki}" type="hidden" name="lodowki" value="0"> </input>
+    <input class="btn btn-info" type="submit" value="Submit" th:value="Usun" style="margin-top:15px"></input>
+</form>
+</div>
+
+<div  style="margin-left:30px">
+<form  action="#" th:action="@{/Admin}" method="get" style="margin-top:50px;">
+    <input class="btn btn-info" type="submit" value="Powrot"></input>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</div>
+</div>
+</body>
+</html>
